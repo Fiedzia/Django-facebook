@@ -83,6 +83,7 @@ understand the required functionality
 
 from django.http import QueryDict
 from django.utils import six
+from django.utils.encoding import smart_str
 from django.utils.http import urlencode
 from django_facebook import settings as facebook_settings
 from open_facebook import exceptions as facebook_exceptions
@@ -472,7 +473,7 @@ class FacebookAuthorization(FacebookConnection):
         sig = base64_url_decode_php_style(encoded_sig)
         import hmac
         import hashlib
-        data = json.loads(base64_url_decode_php_style(payload))
+        data = json.loads(smart_str(base64_url_decode_php_style(payload)))
 
         algo = data.get('algorithm').upper()
         if algo != 'HMAC-SHA256':
