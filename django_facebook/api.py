@@ -1,4 +1,9 @@
 try:
+    unicode = unicode
+except NameError:
+    unicode = str
+
+try:
     from django.forms.utils import ValidationError
 except ImportError:
     from django.forms.util import ValidationError
