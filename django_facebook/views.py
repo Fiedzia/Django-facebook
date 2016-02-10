@@ -58,9 +58,11 @@ def _connect(request, graph):
     So we know we either have a graph and permissions, or the user denied
     the oAuth dialog
     '''
+
     backend = get_registration_backend()
     context = RequestContext(request)
-    connect_facebook = to_bool(request.REQUEST.get('connect_facebook'))
+    qdict = request.GET if request.method == 'GET' else request.POST
+    connect_facebook = to_bool(qdict.get('connect_facebook'))
 
     logger.info('trying to connect using Facebook')
     if graph:
