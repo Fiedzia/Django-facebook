@@ -11,6 +11,7 @@ from django.http import QueryDict, HttpResponse, HttpResponseRedirect
 from django.conf import settings
 import django.contrib.auth
 from django.db import models, transaction
+from django.apps import apps
 import logging
 import django
 import re
@@ -40,7 +41,7 @@ def get_profile_model():
     profile_string = getattr(settings, 'AUTH_PROFILE_MODULE', None)
     if profile_string:
         app_label, model_label = profile_string.split('.')
-        model = models.get_model(app_label, model_label)
+        model = apps.get_model(app_label, model_label)
     return model
 
 
